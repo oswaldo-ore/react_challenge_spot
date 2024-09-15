@@ -40,7 +40,7 @@ This is a basic React project created with Vite and TypeScript. It uses Bootstra
 Make sure to configure the `.env` file in the root of the project:
 
 ```env
-VITE_API_URL=https://api-shorturl.tecnosoft.xyz/api/admin
+VITE_API_URL=https://your-api-url/api/admin
 ```
 
 ## Project Structure
