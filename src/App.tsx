@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import {type UrlShorteners} from './types'
+import { UrlShortenersList } from './components/UrlShortenersList'
+
+const baseUri = 'https://api-shorturl.tecnosoft.xyz/api/admin'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [urlsShorts, setUrlShortenersState] = useState<UrlShorteners[]>([])
+  useEffect(() => {
+    fetch(`${baseUri}/url-shortener`)
+      .then(response => response.json())
+      .then(response => setUrlShortenersState(response.data))
+      .catch(error => console.error(error))
+  },[])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="d-flex justify-content-between mb-4">
+        <h1 className="text-start">Shortener URLs</h1>
+        <button> <i className="bi bi-cloud-plus"></i>Create </button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <UrlShortenersList urlShorteners={urlsShorts} />
+    </div>
   )
 }
 
