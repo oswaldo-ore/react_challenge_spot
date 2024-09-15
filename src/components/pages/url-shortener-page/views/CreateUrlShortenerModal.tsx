@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { UrlShorteners } from "../../../../types";
+import { UrlService } from "../../../../services/UrlShortenerService";
 interface Props {
     isOpen: boolean;
-    // closeModal: () => void;
     onClose: () => void;
     onAddUrlShortener: (urlShortener: UrlShorteners) => void;
 }
-
+const urlService = new UrlService();
 export function CreateUrlShortenerModal({ isOpen, onClose, onAddUrlShortener }: Props) {
     const [url, setUrl] = useState<string>("");
     const [error, setError] = useState<string>("");
@@ -39,19 +39,12 @@ export function CreateUrlShortenerModal({ isOpen, onClose, onAddUrlShortener }: 
     };
 
     const saveUrl = async () => {
-        const response = await fetch("https://api-shorturl.tecnosoft.xyz/api/admin/url-shortener", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ url: url }),
-        });
-        const data = await response.json();
-        if (data.code == 200) {
-            onAddUrlShortener(data.data);
+        try {
+            const response = await urlService.createUrlShortener(url);
+            onAddUrlShortener(response.data);
             onClose();
-        } else {
-            setError(data.message);
+        } catch (error) {
+            console.error(error);
         }
     }
     if (!isOpen) return null;

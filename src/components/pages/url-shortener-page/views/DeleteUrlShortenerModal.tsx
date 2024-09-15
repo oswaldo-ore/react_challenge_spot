@@ -1,8 +1,6 @@
+import { UrlService } from "../../../../services/UrlShortenerService";
 import { type UrlShorteners } from "../../../../types";
 import { Button, Modal } from "react-bootstrap";
-
-
-const baseUri = "https://api-shorturl.tecnosoft.xyz/api/admin";
 
 interface Props {
     urlShortener: UrlShorteners|null;
@@ -17,19 +15,15 @@ export function DeleteUrlShortenerModal({
     onClose,
     urlShortenerDeleted,
 }: Props) {
+    const urlService = new UrlService();
     const acceptDelete = () => {
         if (urlShortener) {
-            fetch(
-                `${baseUri}/url-shortener/${urlShortener.id}`,
-                {
-                    method: "DELETE",
-                }
-            )
-                .then(() => {
-                    urlShortenerDeleted(urlShortener.id);
-                    onClose();
-                })
-                .catch((error) => console.error(error));
+            urlService.deleteUrlShortener(urlShortener.id)
+            .then(() => {
+                urlShortenerDeleted(urlShortener.id);
+                onClose();
+            })
+            .catch((error) => console.error(error));
         }
     };
     return (

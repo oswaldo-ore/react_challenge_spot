@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Proyecto React con Vite
 
-Currently, two official plugins are available:
+Este es un proyecto básico de React creado con Vite y TypeScript. Utiliza Bootstrap para el estilo y React Router para el enrutamiento.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requisitos
 
-## Expanding the ESLint configuration
+- Node.js
+- npm o yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Instalación
 
-- Configure the top-level `parserOptions` property like this:
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/tu-proyecto.git
+   cd tu-proyecto
+   ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+3. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+4. Para compilar el proyecto para producción:
+   ```bash
+   npm run build
+   ```
+
+## Configuración de Variables de Entorno
+
+Asegúrate de configurar el archivo `.env` en la raíz del proyecto:
+
+```env
+VITE_API_URL=https://api-shorturl.tecnosoft.xyz/api/admin
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Estructura del Proyecto
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+src/
+├── components/    # Componentes reutilizables
+├── pages/         # Páginas de la aplicación
+├── services/      # Lógica para las peticiones a la API
+├── App.tsx        # Componente principal
+└── main.tsx       # Punto de entrada
 ```
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT.

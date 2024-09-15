@@ -5,14 +5,16 @@ import { UrlShorteners } from "../../../types";
 import { DeleteUrlShortenerModal } from "./views/DeleteUrlShortenerModal";
 import { CreateUrlShortenerModal } from "./views/CreateUrlShortenerModal";
 import { UrlShortenersList } from "./views/UrlShortenersList";
+import { useNavigate } from 'react-router-dom';
+import { UrlService } from "../../../services/UrlShortenerService";
 
-const baseUri = "https://api-shorturl.tecnosoft.xyz/api/admin";
 export default function UrlShortenerPage() {
+    const urlService = new UrlService();
     const [urlsShorts, setUrlShortenersState] = useState<UrlShorteners[]>([]);
     const [showCreate, setShowCreate] = useState<boolean>(false);
     const [showDelete, setShowDelete] = useState<boolean>(false);
     const [selectedUrlShortener, setSelectedUrlShortener] = useState<UrlShorteners | null>(null);
-  
+    const navigate = useNavigate();
   
     const handleCreateClose = () => setShowCreate(false);
     const handleCreateShow = () => setShowCreate(true);
@@ -23,22 +25,24 @@ export default function UrlShortenerPage() {
       setUrlShortenersState([...urlsShorts, urlShortener]);
     }
     useEffect(() => {
-      fetch(`${baseUri}/url-shortener`)
-        .then((response) => response.json())
-        .then((response) => setUrlShortenersState(response.data))
+      urlService.getUrlShorteners()
+        .then((response) => {
+          setUrlShortenersState(response.data);
+        })
         .catch((error) => console.error(error));
-    }, []);
+    });
   
     const deleteUrlShortener = (id: number) => {
       setUrlShortenersState([...urlsShorts.filter(urlShortener => urlShortener.id !== id)]);
     }
   
     const selectedUrlShortenerForDelete = (urlShortener: UrlShorteners) => {
-      console.log(urlShortener);
       setSelectedUrlShortener(urlShortener);
       setShowDelete(true);
     }
-
+    const goToUrl = (code:string) => {
+        navigate(`/${code}`);
+    };
     return (
         <div className="">
           <div className="d-flex justify-content-between mb-4">
@@ -50,7 +54,7 @@ export default function UrlShortenerPage() {
           <UrlShortenersList
             urlShorteners={urlsShorts}
             deleteUrlShortener={selectedUrlShortenerForDelete}
-            openUrlShortener={(code) => { console.log(code) }}
+            openUrlShortener={goToUrl}
           />
           <CreateUrlShortenerModal isOpen={showCreate} onClose={handleCreateClose} onAddUrlShortener={addUrlShortener} />
           <DeleteUrlShortenerModal 
