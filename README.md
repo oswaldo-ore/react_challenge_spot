@@ -1,55 +1,55 @@
 
-# Proyecto React con Vite
+# React Project with Vite
 
-Este es un proyecto básico de React creado con Vite y TypeScript. Utiliza Bootstrap para el estilo y React Router para el enrutamiento.
+This is a basic React project created with Vite and TypeScript. It uses Bootstrap for styling and React Router for routing.
 
-## Requisitos
+## Requirements
 
 - Node.js
-- npm o yarn
+- npm or yarn
 
-## Instalación
+## Installation
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/tu-usuario/tu-proyecto.git
-   cd tu-proyecto
+   git clone https://github.com/oswaldo-ore/react_challenge_spot.git
+   cd your-project
    ```
 
-2. Instala las dependencias:
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. Inicia el servidor de desarrollo:
+3. Start the development server:
    ```bash
    npm run dev
    ```
 
-4. Para compilar el proyecto para producción:
+4. To build the project for production:
    ```bash
    npm run build
    ```
 
-## Configuración de Variables de Entorno
+## Environment Variables Setup
 
-Asegúrate de configurar el archivo `.env` en la raíz del proyecto:
+Make sure to configure the `.env` file in the root of the project:
 
 ```env
 VITE_API_URL=https://api-shorturl.tecnosoft.xyz/api/admin
 ```
 
-## Estructura del Proyecto
+## Project Structure
 
 ```bash
 src/
-├── components/    # Componentes reutilizables
-├── pages/         # Páginas de la aplicación
-├── services/      # Lógica para las peticiones a la API
-├── App.tsx        # Componente principal
-└── main.tsx       # Punto de entrada
+├── components/    # Reusable components
+├── pages/         # Application pages
+├── services/      # API request logic
+├── App.tsx        # Main component
+└── main.tsx       # Entry point
 ```
 
-## Licencia
+## License
 
-Este proyecto está bajo la licencia MIT.
+This project is licensed under the MIT License.
