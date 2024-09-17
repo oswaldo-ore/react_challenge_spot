@@ -9,7 +9,7 @@ export class UrlService {
       const response = await fetch(`${this.baseUri}/url-shortener/${code}`);
         const data = await response.json();
         if (data.code != 200) {
-          throw new Error(`Error: ${data.message}`);
+          throw new Error(`${data.message}`);
         }
         return data;
     }
@@ -18,7 +18,7 @@ export class UrlService {
       const response = await fetch(`${this.baseUri}/url-shortener`);
       const data = await response.json();
       if (data.code != 200) {
-        throw new Error(`Error: ${data.message}`);
+        throw new Error(`${data.message}`);
       }
       return data;
     }
@@ -29,7 +29,7 @@ export class UrlService {
       });
       const data = await response.json();
       if (data.code != 200) {
-        throw new Error(`Error: ${data.message}`);
+        throw new Error(` ${data.message}`);
       }
       return data;
     }
@@ -44,7 +44,7 @@ export class UrlService {
       });
       const data = await response.json();
       if (data.code != 200) {
-        throw new Error(`Error: ${data.message}`);
+        throw new Error(`${data.message}`);
       }
       return data;
   }

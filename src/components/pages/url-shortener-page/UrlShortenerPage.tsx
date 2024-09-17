@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
 import { Button } from "react-bootstrap";
@@ -30,7 +31,7 @@ export default function UrlShortenerPage() {
           setUrlShortenersState(response.data);
         })
         .catch((error) => console.error(error));
-    });
+    },[urlService]);
   
     const deleteUrlShortener = (id: number) => {
       setUrlShortenersState([...urlsShorts.filter(urlShortener => urlShortener.id !== id)]);

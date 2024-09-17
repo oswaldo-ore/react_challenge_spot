@@ -27,12 +27,12 @@ export function UrlRedirectPage() {
   }, [code]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>URL Redirect Page...</div>;
   }
 
   return (
     <div>
-      <h1>URL Redirect Page</h1>
+      <h1> Url Redirect Info </h1>
       {error ? (
         <div>
           <p>{error}</p>
