@@ -1,7 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { UrlService } from "../../../../services/UrlShortenerService";
 import { type UrlShorteners } from "../../../../types";
 import { Button, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 interface Props {
     urlShortener: UrlShorteners|null;
@@ -17,14 +18,21 @@ export function DeleteUrlShortenerModal({
     urlShortenerDeleted,
 }: Props) {
     const urlService = useMemo(() => new UrlService(), []);
+    const [isLoading, setIsLoading] = useState(false);
     const acceptDelete = () => {
+        setIsLoading(true);
         if (urlShortener) {
             urlService.deleteUrlShortener(urlShortener.id)
             .then(() => {
+                setIsLoading(false);
+                toast("URL deleted successfully.", { type: "success" });
                 urlShortenerDeleted(urlShortener.id);
                 onClose();
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                setIsLoading(false);
+                toast("An error occurred while deleting the URL. "+error, { type: "error"});
+            });
         }
     };
     return (
@@ -45,8 +53,13 @@ export function DeleteUrlShortenerModal({
             <Button variant="secondary" onClick={onClose}>
                 Cancel
             </Button>
-            <Button variant="danger" onClick={acceptDelete}>
-                Delete URL
+            <Button
+                type="submit"
+                variant={isLoading ? "secondary" : "danger"}
+                disabled={isLoading}
+                onClick={acceptDelete}
+            >
+                {isLoading ?"Deleting..." : "Delete URL"}
             </Button>
         </Modal.Footer>
     </Modal>

@@ -5,6 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { type UrlShorteners } from "../../../../types";
+import { Button, Table } from "react-bootstrap";
 
 interface Props {
     urlShorteners: UrlShorteners[];
@@ -19,36 +20,32 @@ export function UrlShortenersList({
 }: Props) {
 
     return (
-        <div className="">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Code</th>
-                        <th>Original URL</th>
-                        <th>Actions</th>
+        <Table striped bordered hover responsive >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Original URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {urlShorteners.map((urlShortener) => (
+                    <tr key={urlShortener.id}>
+                        <td>{urlShortener.id}</td>
+                        <td>{urlShortener.code}</td>
+                        <td>{urlShortener.original_url}</td>
+                        <td>
+                            <Button onClick={() => openUrlShortener(urlShortener.code)} variant="primary" className="me-2">
+                                <FontAwesomeIcon icon={faExternalLinkSquareAlt} />
+                            </Button>
+                            <Button onClick={() => deleteUrlShortener(urlShortener)} variant="danger">
+                                <FontAwesomeIcon icon={faTrashCan} />
+                            </Button>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {urlShorteners.map((urlShortener) => (
-                        <tr key={urlShortener.id}>
-                            <td>{urlShortener.id}</td>
-                            <td>{urlShortener.code}</td>
-                            <td>{urlShortener.original_url}</td>
-                            <td>
-                                <button onClick={() => openUrlShortener(urlShortener.code)}>
-                                    <FontAwesomeIcon icon={faExternalLinkSquareAlt} />
-                                </button>
-                                <button onClick={() => deleteUrlShortener(urlShortener)}>
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            
-        </div>
+                ))}
+            </tbody>
+        </Table>
     );
 }
