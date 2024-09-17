@@ -59,10 +59,6 @@ export function CreateUrlShortenerModal({
             setIsLoading(false);
         }
     };
-
-    const openToast = () => {
-        toast("URL created successfully.", { type: "success" });
-    }
     if (!isOpen) return null;
     return (
         <Modal show={isOpen} onHide={onClose}>
@@ -92,7 +88,7 @@ export function CreateUrlShortenerModal({
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={openToast}>
+                    <Button variant="secondary" onClick={onClose}>
                         Close
                     </Button>
                     <Button
