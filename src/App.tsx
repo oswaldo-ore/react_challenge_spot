@@ -2,12 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import UrlShortenerPage from "./components/pages/url-shortener-page/UrlShortenerPage";
 import { UrlRedirectPage } from "./components/pages/url-redirect-page/UrlRedirectPage";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { Container } from "react-bootstrap";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <div className="container">
+      <Container style={{ width: '100vw' }}>
         <Routes>
           <Route path="/" Component={UrlShortenerPage} />
           <Route path="/:code" Component={UrlRedirectPage} />
@@ -25,7 +26,7 @@ const App: React.FC = () => {
           theme="light"
         />
         <ToastContainer />
-      </div>
+      </Container>
     </div>
   );
 };

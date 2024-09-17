@@ -44,8 +44,8 @@ export default function UrlShortenerPage() {
         navigate(`/${code}`);
     };
     return (
-        <div className="">
-          <div className="d-flex justify-content-between mb-4">
+        <>
+          <div className="d-flex justify-content-between mb-4 mt-4">
             <h1 className="text-start">Shortener URLs</h1>
             <Button variant="primary" size="sm" onClick={handleCreateShow}>
               Create
@@ -63,6 +63,6 @@ export default function UrlShortenerPage() {
             urlShortener={selectedUrlShortener}
             urlShortenerDeleted={deleteUrlShortener}
           />
-        </div>
+        </>
       );
 }

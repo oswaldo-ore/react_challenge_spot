@@ -36,7 +36,7 @@ export function UrlShortenersList({
                         <td>{urlShortener.code}</td>
                         <td>{urlShortener.original_url}</td>
                         <td>
-                            <Button onClick={() => openUrlShortener(urlShortener.code)} variant="primary" className="me-2">
+                            <Button onClick={() => openUrlShortener(urlShortener.code)} variant="primary">
                                 <FontAwesomeIcon icon={faExternalLinkSquareAlt} />
                             </Button>
                             <Button onClick={() => deleteUrlShortener(urlShortener)} variant="danger">
