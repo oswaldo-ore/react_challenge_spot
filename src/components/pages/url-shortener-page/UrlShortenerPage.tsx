@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "react-bootstrap";
 import { UrlShorteners } from "../../../types";
@@ -10,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { UrlService } from "../../../services/UrlShortenerService";
 
 export default function UrlShortenerPage() {
-    const urlService = new UrlService();
+    const urlService = useMemo(() => new UrlService(), []);
     const [urlsShorts, setUrlShortenersState] = useState<UrlShorteners[]>([]);
     const [showCreate, setShowCreate] = useState<boolean>(false);
     const [showDelete, setShowDelete] = useState<boolean>(false);

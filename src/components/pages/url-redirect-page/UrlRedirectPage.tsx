@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UrlService } from "../../../services/UrlShortenerService";
-const urlService = new UrlService();
 
 export function UrlRedirectPage() {
+  const urlService = useMemo(() => new UrlService(), []);
   const { code } = useParams<{ code?: string }>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export function UrlRedirectPage() {
       setLoading(false);
       setError("Code not provided.");
     }
-  }, [code]);
+  }, [code, urlService]);
 
   if (loading) {
     return <div>URL Redirect Page...</div>;

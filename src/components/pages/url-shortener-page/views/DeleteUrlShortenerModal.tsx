@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { UrlService } from "../../../../services/UrlShortenerService";
 import { type UrlShorteners } from "../../../../types";
 import { Button, Modal } from "react-bootstrap";
@@ -15,7 +16,7 @@ export function DeleteUrlShortenerModal({
     onClose,
     urlShortenerDeleted,
 }: Props) {
-    const urlService = new UrlService();
+    const urlService = useMemo(() => new UrlService(), []);
     const acceptDelete = () => {
         if (urlShortener) {
             urlService.deleteUrlShortener(urlShortener.id)

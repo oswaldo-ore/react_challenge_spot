@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { UrlShorteners } from "../../../../types";
 import { UrlService } from "../../../../services/UrlShortenerService";
@@ -7,8 +7,8 @@ interface Props {
     onClose: () => void;
     onAddUrlShortener: (urlShortener: UrlShorteners) => void;
 }
-const urlService = new UrlService();
 export function CreateUrlShortenerModal({ isOpen, onClose, onAddUrlShortener }: Props) {
+    const urlService = useMemo(() => new UrlService(), []);
     const [url, setUrl] = useState<string>("");
     const [error, setError] = useState<string>("");
 
